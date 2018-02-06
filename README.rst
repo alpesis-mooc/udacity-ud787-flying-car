@@ -12,6 +12,7 @@ Resources:
 
 - [Simulator](https://github.com/udacity/FCND-Simulator-Releases/releases)
 - [Starter Kit](https://github.com/udacity/FCND-Term1-Starter-Kit.git)
+- [Backyard Flyer](https://github.com/udacity/FCND-Backyard-Flyer.git)
 
 Tools:
 
