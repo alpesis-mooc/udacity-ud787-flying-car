@@ -1,13 +1,11 @@
 """
 4.15 A*
 
-- solution: https://viewd3457d91.udacity-student-workspaces.com/notebooks/A-Star-Solution.ipynb
 """
 
 from queue import PriorityQueue
 import numpy as np
 from enum import Enum
-
 
 class Action(Enum):
     """
@@ -32,7 +30,6 @@ class Action(Enum):
         elif self == self.DOWN:
             return 'v'
     
-
     @property
     def cost(self):
         return self.value[2]
@@ -41,8 +38,7 @@ class Action(Enum):
     def delta(self):
         return (self.value[0], self.value[1])
             
-
-
+    
 def valid_actions(grid, current_node):
     """
     Returns a list of valid actions given a grid and current node.
@@ -65,7 +61,6 @@ def valid_actions(grid, current_node):
         
     return valid
 
-
 def visualize_path(grid, path, start):
     sgrid = np.zeros(np.shape(grid), dtype=np.str)
     sgrid[:] = ' '
@@ -81,14 +76,13 @@ def visualize_path(grid, path, start):
     sgrid[start[0], start[1]] = 'S'  
     return sgrid
 
-
 # TODO: implement a heuristic function. This may be one of the
 # functions described above or feel free something to think of something
 # else.
 def heuristic(position, goal_position):
-    h = 0
+    
+    h = np.sqrt((position[0] - goal_position[0])**2 + (position[1] - goal_position[1])**2)
     return h
-
 
 def a_star(grid, h, start, goal):
 
@@ -115,8 +109,7 @@ def a_star(grid, h, start, goal):
                 da = action.delta
                 cost = action.cost
                 next_node = (current_node[0] + da[0], current_node[1] + da[1])
-                # TODO: calculate new cost, c + g() + h()
-                new_cost = None
+                new_cost = current_cost + cost + h(next_node, goal)
                 
                 if next_node not in visited:                
                     visited.add(next_node)               
@@ -139,7 +132,6 @@ def a_star(grid, h, start, goal):
             
     return path[::-1], path_cost
 
-
 start = (0, 0)
 goal = (4, 4)
 
@@ -151,12 +143,9 @@ grid = np.array([
     [0, 0, 0, 1, 0, 0],
 ])
 
-
 path, cost = a_star(grid, heuristic, start, goal)
 print(path, cost)
 
-
 # S -> start, G -> goal, O -> obstacle
 visualize_path(grid, path, start)
-
 
