@@ -1,9 +1,9 @@
 """
 4.12. Cost Exericise
 
-- Solution: https://viewd3457d91.udacity-student-workspaces.com/notebooks/Cost-Solution.ipynb
 """
 
+from queue import PriorityQueue
 import numpy as np
 from enum import Enum
 
@@ -20,7 +20,6 @@ class Action(Enum):
     UP = (-1, 0, 1)
     DOWN = (1, 0, 1)
     
-
     def __str__(self):
         if self == self.LEFT:
             return '<'
@@ -38,8 +37,8 @@ class Action(Enum):
     @property
     def delta(self):
         return (self.value[0], self.value[1])
-
-
+            
+    
 def valid_actions(grid, current_node):
     """
     Returns a list of valid actions given a grid and current node.
@@ -62,7 +61,6 @@ def valid_actions(grid, current_node):
         
     return valid
 
-
 def visualize_path(grid, path, start):
     sgrid = np.zeros(np.shape(grid), dtype=np.str)
     sgrid[:] = ' '
@@ -82,33 +80,41 @@ def uniform_cost(grid, start, goal):
 
     # TODO: Initialize the starting variables
     path = []
-    queue = None
-    visited = None
-    
+    queue = PriorityQueue()
+    queue.put((0, start))
+    visited = set(start)
+
     branch = {}
     found = False
     
     while not queue.empty():
         # TODO: Remove the first element from the queue
+        item = queue.get()
+        current_cost = item[0]
+        current_node = item[1]
 
         # TODO: Check if the current vertex corresponds to the goal state
-        if False:        
+        # and set `found` to True if that's the case.
+        if current_node == goal:        
             print('Found a path.')
             found = True
             break
         else:
             for action in valid_actions(grid, current_node):
-                # TODO: determine the next_node using the action delta
-                next_node = None
-                # TODO: compute the new cost
-                new_cost = None
+                # get the tuple representation
+                da = action.delta
+                cost = action.cost
+                next_node = (current_node[0] + da[0], current_node[1] + da[1])
+                new_cost = current_cost + cost
                 
                 # TODO: Check if the new vertex has not been visited before.
                 # If the node has not been visited you will need to
                 # 1. Mark it as visited
                 # 2. Add it to the queue
-                if False:
-
+                if next_node not in visited:                
+                    visited.add(next_node)               
+                    queue.put((new_cost, next_node))
+                    
                     branch[next_node] = (new_cost, current_node, action)
              
     path = []
@@ -138,8 +144,10 @@ grid = np.array([
     [0, 0, 0, 1, 0, 0],
 ])
 
+
 path, path_cost = uniform_cost(grid, start, goal)
 print(path_cost, path)
 
+
 # S -> start, G -> goal, O -> obstacle
-visualize_path(grid, path, start)
+print(visualize_path(grid, path, start))

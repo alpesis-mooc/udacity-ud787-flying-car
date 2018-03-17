@@ -2,7 +2,6 @@
 4.10. Breadth-First-Search
 
 - Time complexity: https://wiki.python.org/moin/TimeComplexity
-- Solution: https://view9dc943e6.udacity-student-workspaces.com/notebooks/BFS-Solution.ipynb
 """
 
 # Import numpy and Enum
