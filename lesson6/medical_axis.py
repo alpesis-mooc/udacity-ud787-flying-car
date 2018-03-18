@@ -16,6 +16,15 @@ print(data)
 start_ne = (25,  100)
 goal_ne = (650, 500)
 
+# Static drone altitude (meters)
+drone_altitude = 5
+safety_distance = 2
+
+grid = create_grid(data, drone_altitude, safety_distance)
+skeleton = medial_axis(invert(grid))
+
+# equivalent to
+# plt.imshow(np.flip(grid, 0))
 
 plt.imshow(grid, cmap='Greys', origin='lower')
 plt.imshow(skeleton, cmap='Greys', origin='lower', alpha=0.7)
@@ -47,7 +56,6 @@ skel_start, skel_goal = find_start_goal(skeleton, start_ne, goal_ne)
 
 print(start_ne, goal_ne)
 print(skel_start, skel_goal)
-
 
 def heuristic_func(position, goal_position):
     # TODO: define a heuristic
