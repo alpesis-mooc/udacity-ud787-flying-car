@@ -1,7 +1,6 @@
 """
 6.5 Collinearity
 
-- Solution: https://view9d7db0d8.udacity-student-workspaces.com/notebooks/Collinearity-Solution.ipynb
 """
 
 # Define Points (feel free to change these)

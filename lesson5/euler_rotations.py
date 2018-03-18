@@ -1,7 +1,5 @@
 """
 5.10 Euler Roations
-
-- Solution: https://view7457fe45.udacity-student-workspaces.com/notebooks/Rotations-Solution.ipynb
 """
 
 import matplotlib.pyplot as plt 

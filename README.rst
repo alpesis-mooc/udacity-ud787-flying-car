@@ -26,6 +26,8 @@ Lesson 4 Planning as Search
 Lesson 5 Flying Car Representation
 ==============================================================================
 
+- [Gimbal Lock](https://github.com/udacity/FCND-Gimbal-Demo)
+
 ==============================================================================
 Lesson 6 From Grids to Graphs
 ==============================================================================
