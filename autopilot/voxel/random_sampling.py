@@ -55,6 +55,7 @@ def random_sampling(data, polygons, num_samples, zmin, zmax):
 
     t0 = time.time()
     to_keep = []
+    points = []
     for point in samples:
         if not collides(polygons, point):
             to_keep.append(point)
