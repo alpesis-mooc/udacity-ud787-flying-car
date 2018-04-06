@@ -90,7 +90,7 @@ def a_star(graph, heuristic, start, goal):
     return path[::-1], path_cost
 
 
-def plot(data, nodes, graph_nodes, edges):
+def plot(data, nodes, g):
     fig = plt.figure()
     plt.imshow(grid, cmap='Greys', origin='lower')
 
@@ -106,7 +106,7 @@ def plot(data, nodes, graph_nodes, edges):
         plt.scatter(n1[1] - emin, n1[0] - nmin, c='blue')
     
     # draw connected nodes
-    for n1 in graph_nodes:
+    for n1 in g.nodes:
         plt.scatter(n1[1] - emin, n1[0] - nmin, c='red')
 
     plt.xlabel('NORTH')
@@ -148,7 +148,7 @@ if __name__ == '__main__':
     data = np.loadtxt(filename, delimiter=',', dtype='Float64', skiprows=2)
     print(data)
 
-    num_samples = 100
+    num_samples = 300
     zmin = 0
     zmax = 10
     polygons = extract_polygons(data)
@@ -161,7 +161,7 @@ if __name__ == '__main__':
     print("Number of edges", len(g.edges))
 
     grid = create_grid(data, zmax, 1)
-    plot(data, nodes, g.nodes, g.edges)
+    plot(data, nodes, g)
 
     start = list(g.nodes)[0]
     k = np.random.randint(len(g.nodes))
